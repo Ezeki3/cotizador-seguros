@@ -1,3 +1,4 @@
+const btnCotizar = document.querySelector('button');
 
 // Constructores
 function Seguro(marca, year, tipo) {
@@ -30,6 +31,9 @@ UI.prototype.llenarOpciones = () => {
 // Muestra alertas en pantalla
 UI.prototype.mostrarMensaje = (mensaje, tipo) => {
 
+  btnCotizar.style.visibility = "hidden"; //Oculto el boton
+  // btnCotizar.style.opacity = 0.2;
+
   const div = document.createElement('div');
 
   if (tipo === 'error') {
@@ -39,12 +43,21 @@ UI.prototype.mostrarMensaje = (mensaje, tipo) => {
   }
 
   div.classList.add('mensaje', 'mt-10');
+  div.textContent = mensaje;
 
+  // Insertar en el html
+  const formulario = document.querySelector('#cotizar-seguro');
+  formulario.insertBefore(div, document.querySelector('#resultado'));
+
+  setTimeout(() => {
+    div.remove();
+    btnCotizar.style.visibility = "visible"; //Visibilizo el boton
+  }, 3000);
 }
 
 // Instanciamos
 const ui = new UI();
-console.log(ui);
+
 
 document.addEventListener('DOMContentLoaded', () => {
   ui.llenarOpciones(); //ya cargado el documento mandamos a cargar el select con los años
@@ -69,9 +82,8 @@ function cotizarSeguro(e) {
   const tipo = document.querySelector('input[name="tipo"]:checked').value;
 
   if (marca === '' || year === '' || tipo === '') {
-    console.log('No paso la validacion');
-  } else {
-    console.log('Si paso');
+    ui.mostrarMensaje('Todos los campos son obligatorios', 'error');
+    return;
   }
-
+  ui.mostrarMensaje('Cotizacion en proceso', 'exito')
 }
