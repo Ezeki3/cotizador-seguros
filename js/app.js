@@ -10,6 +10,7 @@ function UI() {
 
 }
 
+// SE PUEDEN USAR ARROW FUNCTION si nuestro objeto no tiene propiedas, si tienen propiedades es mejor usar una function normal
 // Llenamos las opciones de los años
 UI.prototype.llenarOpciones = () => {
   const max = new Date().getFullYear(),
@@ -23,6 +24,21 @@ UI.prototype.llenarOpciones = () => {
     option.textContent = i;
     selectYear.appendChild(option);
   }
+
+}
+
+// Muestra alertas en pantalla
+UI.prototype.mostrarMensaje = (mensaje, tipo) => {
+
+  const div = document.createElement('div');
+
+  if (tipo === 'error') {
+    div.classList.add('error');
+  } else {
+    div.classList.add('correcto');
+  }
+
+  div.classList.add('mensaje', 'mt-10');
 
 }
 
