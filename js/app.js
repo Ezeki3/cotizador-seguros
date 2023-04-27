@@ -7,6 +7,11 @@ function Seguro(marca, year, tipo) {
   this.tipo = tipo;
 }
 
+// Realiza la cotizacion con los datos
+Seguro.prototype.cotizarSeguro = function () {
+
+}
+
 function UI() {
 
 }
@@ -85,5 +90,12 @@ function cotizarSeguro(e) {
     ui.mostrarMensaje('Todos los campos son obligatorios', 'error');
     return;
   }
-  ui.mostrarMensaje('Cotizacion en proceso', 'exito')
+  ui.mostrarMensaje('Cotizacion en proceso', 'exito');
+
+  // Instanciamos el seguro
+  const seguro = new Seguro(marca, year, tipo);
+  console.log(seguro);
+
+  // Utilizamos el prototype que va a cotizar
+
 }
