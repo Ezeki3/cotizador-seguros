@@ -48,7 +48,6 @@ Seguro.prototype.cotizarSeguro = function () {
     cantidad *= 1.50;
   }
   return cantidad
-  console.log(cantidad);
 }
 
 function UI() {
@@ -111,7 +110,15 @@ UI.prototype.mostrarResultado = (total, seguro) => {
   `;
 
   const resulatdoDiv = document.querySelector('#resultado');
-  resulatdoDiv.appendChild(div);
+
+  // Mostar el spinner
+  const spinner = document.querySelector('#cargando');
+  spinner.style.display = 'block';
+
+  setTimeout(() => {
+    spinner.style.display = 'none';
+    resulatdoDiv.appendChild(div); //se muestra el resultado, despues que quitamos los spinners
+  }, 3000);
 }
 
 // Instanciamos
