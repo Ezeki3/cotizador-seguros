@@ -10,6 +10,44 @@ function Seguro(marca, year, tipo) {
 // Realiza la cotizacion con los datos
 Seguro.prototype.cotizarSeguro = function () {
 
+  // 1 = Americano 1.15
+  // 2 = Asicatico 1.05
+  // 3 = Europeo 1.35
+
+  let cantidad;
+  const base = 2000;
+
+  switch (this.marca) {
+    case '1':
+      cantidad = base * 1.15
+      break;
+    case '2':
+      cantidad = base * 1.05
+      break;
+    case '3':
+      cantidad = base * 1.35
+      break;
+    default:
+      break;
+  }
+
+  // Leer el año
+  const diferencia = new Date().getFullYear() - this.year;
+
+  // Cada año que la diferencia es  es mayor, el costo va a reducirse un 3%
+  cantidad -= ((diferencia * 3) * cantidad) / 100;
+
+  /*
+    Si el seguro es basico se multiplica por un 30% mas
+    Si el seguro es completo se multiplica por un 50% mas
+  */
+
+  if (this.tipo === 'basico') {
+    cantidad *= 1.30;
+  } else {
+    cantidad *= 1.50;
+  }
+  console.log(cantidad);
 }
 
 function UI() {
@@ -94,7 +132,7 @@ function cotizarSeguro(e) {
 
   // Instanciamos el seguro
   const seguro = new Seguro(marca, year, tipo);
-  console.log(seguro);
+  seguro.cotizarSeguro();
 
   // Utilizamos el prototype que va a cotizar
 
