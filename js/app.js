@@ -153,6 +153,12 @@ function cotizarSeguro(e) {
   }
   ui.mostrarMensaje('Cotizacion en proceso', 'exito');
 
+  // Ocultar las cotizaciones previas
+  const resultados = document.querySelector('#resultado div');
+  if (resultados != null) {
+    resultados.remove();
+  }
+
   // Instanciamos el seguro
   const seguro = new Seguro(marca, year, tipo);
   const total = seguro.cotizarSeguro();
