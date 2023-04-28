@@ -99,6 +99,23 @@ UI.prototype.mostrarMensaje = (mensaje, tipo) => {
 }
 
 UI.prototype.mostrarResultado = (total, seguro) => {
+
+  const { marca, year, tipo } = seguro;
+  let nombreMarca;
+
+  switch (marca) {
+    case '1':
+      nombreMarca = 'Americano'
+      break;
+    case '2':
+      nombreMarca = 'Asiatico'
+      break;
+    case '3':
+      nombreMarca = 'Europeo'
+      break;
+    default:
+      break;
+  }
   // Crear el resultado
   const div = document.createElement('div');
   div.classList.add('mt-10');
@@ -106,7 +123,10 @@ UI.prototype.mostrarResultado = (total, seguro) => {
   // innerHTML cuando queremos modificar el html y textContent cuando queremos crear el HTML
   div.innerHTML = `
     <p class="header">Tu Resumen</p>
-    <p class="font-bold">Total: ${total}</p>
+    <p class="font-bold">Marca: <span class="font-normal"> ${nombreMarca}</span></p>
+    <p class="font-bold">Año: <span class="font-normal">${year}</span></p>
+    <p class="font-bold">Tipo: <span class="font-normal capitalize">${tipo}</span></p>
+    <p class="font-bold">Total: <span class="font-normal"> $ ${total}</span></p>
   `;
 
   const resulatdoDiv = document.querySelector('#resultado');
